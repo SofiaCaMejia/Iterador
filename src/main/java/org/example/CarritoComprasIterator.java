@@ -8,6 +8,7 @@ public class CarritoComprasIterator<T extends Valorable> implements Iterator<T> 
     private List<T> items;
     private int posicion = 0;
     private double minimo;
+    private boolean Eliminar;
 
     public CarritoComprasIterator(List<T> items, double minimo) {
         this.items = items;
@@ -28,6 +29,15 @@ public class CarritoComprasIterator<T extends Valorable> implements Iterator<T> 
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
+        Eliminar =  true;
         return items.get(posicion++);
+    }
+    @Override
+    public void remove() {
+        if (!Eliminar) {
+            throw new IllegalStateException("primero llamar a next() antes que remove()");
+        }
+        items.remove(--posicion);
+        Eliminar = false;
     }
 }

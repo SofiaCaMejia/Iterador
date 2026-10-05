@@ -1,4 +1,5 @@
 package org.example;
+import java.util.Iterator;
 
 public class Main {
     public static void main(String[] args) {
@@ -14,11 +15,21 @@ public class Main {
 //        System.out.println("Carrito vacío: " + vacio.obtenerMayor());
 
         System.out.println("Prductos Mayores 1000");
-        for(Producto1 producto1 : carrito){
+        for(Producto1 producto1 : carrito) {
             System.out.println(producto1);
+
+
         }
+        Iterator<Producto1>  it = carrito.iterator();
+        while(it.hasNext()) {
+            Producto1 producto1 = it.next();
+            System.out.println(producto1);
 
-
+            if (producto1.getPrecio() < 2000) {
+                it.remove();
+                System.out.println("productos removidos");
+            }
+        }
     }
 
 }
